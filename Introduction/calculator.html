@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      background-color: black;
+    }
+
+    button {
+      background-color: rgb(51, 51, 51);
+      height: 60px;
+      width: 60px;
+      border: none;
+      border-radius: 60px;
+      color: white;
+      font-weight: bold;
+      font-size: 26px;
+    }
+
+    .worded {
+      font-size: 13px;
+      padding: 21px;
+      height: unset;
+      width: unset;
+    }
+
+    .calculation-display {
+      font-size: 55px;
+      margin-block: 3px;
+    }
+
+    .operation {
+      background-color: rgb(254, 160, 10);
+    }
+
+    @media (width < 270px) {
+      * {
+        font-size: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body onkeydown="
+		
+	calculateOnKeyDown(event);
+	
+	">
+  <p class="js-display-calculation calculation-display"></p>
+  <p>
+    <button onclick="
+        const value = 1;
+        updateCalculation(value);
+      ">
+      1
+    </button>
+    <button onclick="
+				value = 2;
+				updateCalculation(value);">
+      2
+    </button>
+    <button onclick="
+				value = 3;
+				updateCalculation(value);">
+      3
+    </button>
+    <button class="operation" onclick="
+				value = '+';
+				updateCalculation(value);">
+      +
+    </button>
+  </p>
+  <p>
+    <button onclick="
+				value = 4;
+				updateCalculation(value);">
+      4
+    </button>
+    <button onclick="
+				value = 5;
+				updateCalculation(value);">
+      5
+    </button>
+    <button onclick="
+				 value = 6;
+				updateCalculation(value);">
+      6
+    </button>
+    <button class="operation" onclick="
+				 value = '-';
+				updateCalculation(value);">
+      -
+    </button>
+  </p>
+  <p>
+    <button onclick=" value = 7; 
+				updateCalculation(value);">
+      7
+    </button>
+    <button onclick=" value = 8; 
+				updateCalculation(value);">
+      8
+    </button>
+    <button onclick=" value = 9; 
+				updateCalculation(value);">
+      9
+    </button>
+    <button class="operation" onclick=" value = '*'; 
+				updateCalculation(value);">
+      *
+    </button>
+  </p>
+  <p>
+    <button onclick=" value = 0; 
+				updateCalculation(value);">
+      0
+    </button>
+    <button onclick=" value = '.'; 
+				updateCalculation(value);">
+      .
+    </button>
+    <button onclick="
+				evaluateCalculation();
+				// resetCalculation();
+			">
+      =
+    </button>
+    <button class="operation" onclick=" value = '/';
+				updateCalculation(value);">
+      /
+    </button>
+  </p>
+  <p>
+    <button class="worded" onclick="resetCalculation();
+				console.log('Reseted');">
+      Clear
+    </button>
+    <button class="worded" onclick="
+				calculation = calculation.slice(0 , -1);
+				displayCalculation();
+			">
+      Delete
+    </button>
+  </p>
+  <script>
+    const numberList = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "+",
+      "-",
+      "/",
+      "*",
+      ".",
+    ];
+    let calculation = localStorage.getItem("calculation") || "";
+    function updateCalculation(value) {
+      calculation += value;
+      localStorage.setItem("calculation", calculation);
+      displayCalculation();
+    }
+
+    function resetCalculation() {
+      calculation = "";
+      displayCalculation();
+    }
+    function evaluateCalculation() {
+      try {
+        calculation = String(eval(calculation));
+        displayCalculation();
+      } catch {
+        calculation = "Error";
+        displayCalculation();
+      }
+    }
+    function displayCalculation() {
+      if (calculation) {
+        document.querySelector(
+          ".js-display-calculation"
+        ).innerHTML = `${calculation}`;
+      } else {
+        document.querySelector(".js-display-calculation").innerHTML = `0`;
+      }
+      localStorage.setItem("calculation", calculation);
+    }
+    function calculateOnKeyDown(event) {
+      event.preventDefault();
+      if (event.key === "Enter") {
+        evaluateCalculation();
+      } else if (event.key === "Backspace") {
+        calculation = calculation.slice(0, -1);
+        displayCalculation();
+      } else if (numberList.includes(event.key)) {
+        calculation += event.key;
+        displayCalculation();
+      } else if (!numberList.includes(event.key)) {
+        return;
+      } else {
+        calculation += event.key;
+        displayCalculation();
+      }
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (numberList.includes(event.key)) {
+        event.preventDefault();
+      }
+    });
+    alert(
+      "You can type on the Keyboard to input numbers and operators , press Enter to calculate, Backspace to Delete. I'll add tooltips later..."
+    );
+    document.addEventListener("DOMContentLoaded", displayCalculation());
+  </script>
+</body>
+
+</html>

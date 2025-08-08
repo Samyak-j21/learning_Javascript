@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objects</title>
+</head>
+
+<body>
+
+  <script>
+    const product = {
+      name: 'socks',
+      'delivery-time': '1 day',
+      price: 125,
+
+      rating: {
+        stars: 4.8,
+        count: 87
+      }
+    };
+    console.log(product);
+    console.log(product.name);
+    console.log(product.price);
+    console.log(product['delivery-time']);
+    console.log(product.rating.count);
+
+    product.name = 'cotton-socks';
+    console.log(product);
+
+    product.newproperty = true;
+    console.log(product);
+
+    delete product.newproperty;
+    console.log(product);
+
+    console.log(JSON.stringify(product));
+    console.log(JSON.parse(JSON.stringify(product)));
+
+    (localStorage.setItem('message', 'hello'));  // store to local storage
+    console.log(localStorage.getItem('message')); // delete message from localstorage
+
+
+    const object1 = {
+      message: 'Good Job!'
+    };
+
+    // const message = object1.message; for same shortcut is in next line.it will save it in a variable 
+    const { message } = object1;
+
+  </script>
+</body>
+
+</html>

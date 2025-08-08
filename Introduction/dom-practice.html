@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM practice</title>
+</head>
+
+<body>
+  <!-- <button> 9a </button> -->
+  <!-- <button class="js-second-button">9b</button> -->
+
+  <!-- <button class="choice-button" onclick="choose(this)">heads</button>
+   <button class="choice-button" onclick="choose(this)">tails</button> -->
+
+  <!-- <p class="result"></p> -->
+
+
+  <input placeholder="Name" class="js-name-display" onkeydown=" 
+   display(event);">
+
+  <button onclick="
+    display(event);
+    ">Submit</button>
+
+  <p class="name-output"></p>
+
+
+  <script>
+    // console.log(document.querySelector('button').innerHTML);
+
+    // document.querySelector('.js-second-button').innerText
+    //   = '9b done!';
+
+    // function choose(button) {
+    //   const result = document.querySelector('.result');
+    //   const choice = button.textContent.toLowerCase();
+    //   result.textContent = `You choose ${choice}`;
+    // }
+
+
+    function display(event) {
+      const name = document.querySelector('.js-name-display').value
+      console.log(`Your name is:${name}`);
+
+      if (event.key === 'Enter' || event.type === 'click') {
+        document.querySelector('.name-output').textContent = `Your name is: ${name}`;
+
+      }
+    }
+
+
+
+  </script>
+</body>
+
+</html>
