@@ -271,3 +271,4 @@ arrowFunction();
 // closure : if a function has access to a value then it will always have access to that value, value gets packaged together (enclosed) with the function
 
 
+11:18:00
