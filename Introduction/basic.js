@@ -270,5 +270,12 @@ arrowFunction();
 
 // closure : if a function has access to a value then it will always have access to that value, value gets packaged together (enclosed) with the function
 
+// =================== Learning in Project ===========================
 
-11:18:00
+// we have generated HTML using JS we have made JS objects and then loop it and displayed using DOM 
+
+//This is how real world website works we enter the data and generate using JavaScript for better view must see "data/products.js"
+
+// Data attribute - is just another HTML attribute which allows us to attach any info to an element
+// syntax: data-product-name = "${product.name}" ,must start with data
+
