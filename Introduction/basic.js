@@ -1,9 +1,9 @@
 // for running these commands go to inspect and then console of any website and write there
 
-alert('Hello');  // use to give pop ups in any website
+alert("Hello"); // use to give pop ups in any website
 
-document.body.innerHTML = ''; // use to clean whole website page which is visible
-document.body.innerHTML = 'Hello How are you'; // clean whole website ui and display this message there
+document.body.innerHTML = ""; // use to clean whole website page which is visible
+document.body.innerHTML = "Hello How are you"; // clean whole website ui and display this message there
 
 // numbers and strings follows a order of operations i.e.
 // 1 (...)
@@ -13,21 +13,20 @@ document.body.innerHTML = 'Hello How are you'; // clean whole website ui and dis
 // Calculations with floats are sometimes inaccurate, when working with money
 // do calculation in Paisa/cents then convert it into Rupees/dollars
 
-Math.round(2.2) // Use to round off the number. since,JS is case sensitive must use capital M 
+Math.round(2.2); // Use to round off the number. since,JS is case sensitive must use capital M
 
-'hello' // and "Hello" // we can write strings like this we can also concatenate multiple strings
+("hello"); // and "Hello" // we can write strings like this we can also concatenate multiple strings
 // also numbers with strings ****** 'hello' + 3  **** this will give output hello3
 // JS automatically converts numbers to strings if they are added to strings
-typeof 'hello'  // typeof; used to find type is it a string of number or anything
+typeof "hello"; // typeof; used to find type is it a string of number or anything
 
-'I\'m learning Javascript' // we can use escape characters \' these counts as 1 in JS
-
-  // some more escape characters are: 
+"I'm learning Javascript"// some more escape characters are: // we can use escape characters \' these counts as 1 in JS
   // 1. \" = double quote that is just text
   // 2. \n = newline character
 
-  `hello` // this prints 'hello' // interpolation is cleaner method to print a solution
+  `hello`; // this prints 'hello' // interpolation is cleaner method to print a solution
 
+import { addToCart } from '../Amazon-clone/data/cart';
 // Note: must use '...' by default to print a string
 // If we need interpolation, multi line string use `...`
 
@@ -164,7 +163,6 @@ console.log(string.repeat(3)); */
 
 // window.document => DOM we can access any part of window(console,popups etc..). window is a built-in object JS directly add window when we write console or anything.
 
-
 // =========================== CSS Basics ============================
 
 // buttonElement.classList.add('is-subscribed'); ==> this add a class named is-subscribed
@@ -175,7 +173,6 @@ console.log(string.repeat(3)); */
 // In this chapter we learned about CSS to project,
 // how to use .classList,
 // Organize JS and CSS codes in diffrent files using link and script.
-
 
 // ========================== Arrays and Loops =======================
 
@@ -272,10 +269,42 @@ arrowFunction();
 
 // =================== Learning in Project ===========================
 
-// we have generated HTML using JS we have made JS objects and then loop it and displayed using DOM 
+// we have generated HTML using JS we have made JS objects and then loop it and displayed using DOM
 
 //This is how real world website works we enter the data and generate using JavaScript for better view must see "data/products.js"
 
 // Data attribute - is just another HTML attribute which allows us to attach any info to an element
 // syntax: data-product-name = "${product.name}" ,must start with data
+
+// Modules- better way to organise our code
+// to create a module :
+// 1. create a File
+// 2. dont load the file with <script>
+// Any variable we create inside the file, will be contained inside the file.
+
+// To get a variable out of a file:
+// 1. Add type = "module" attribute
+// 2. Export and Import
+// NOTE: we have to put all imports at top of the file, and must use live server.
+
+// We import as: import { cart, addToCart } from '../data/cart.js';
+
+// alternative way is:
+/* import *as cartModule from '../data/cart.js'
+cartModule.cart
+cartModule.addToCart('id');
+*/
+
+// we have created money.js to share between diffrent files
+
+// We can also load external codes just using script tags, provide links into that
+
+/* for the delivery dates we have to perform steps:
+1. Get today's date
+2. Do calculations
+3. Display the date in readable format
+*/
+
+// instead of doing all these we will use "DayJS" external library
+// usually all external libraries have documentations availabe which tells how to use that external library.
 
