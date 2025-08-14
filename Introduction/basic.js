@@ -421,3 +421,10 @@ console.log(date);
 // 3. expect => checking test conditions
 
 // Note: we can use describe inside describe
+
+// Test coverage: how much of the code is being tested
+// Always try to MAXIMIZE the Test coverage
+
+// Flaky Test = test that sometimes passess and sometimes fails
+
+// To solve flaky test => we use Mocks in jasmine, mocks lets us replace a method with a fake version.
