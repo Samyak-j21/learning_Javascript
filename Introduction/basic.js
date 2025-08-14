@@ -394,8 +394,15 @@ console.log(date);
 // disadvantages: hard to test every situation and hard to re-test
 
 // Automated testing: using code to test the code
+// disadvantages: hard to write all code manually to test
+
 // we add test cases:
 // 1. basic test cases = test if code is working 
 // 2. edge case = test with values that are tricky
 
 // Test Suite: group of related tests
+
+// Testing Framework: External library that help us write tests easier
+// ex- Jasmine,Jest(ReactJs),MochaJs
+
+
