@@ -310,8 +310,19 @@ cartModule.addToCart('id');
 
 // ESM versions: a version that works with Javascript Modules
 // this will add export in front of libraries to be used by modules
-// import these by writing import {} from 'URL', Check checkout.html 
+// import these by writing import {} from 'URL', Check checkout.html
 
- // Default Export:
- // another way of exporting
- // we can use it when we only want to export 1 thing
+// Default Export:
+// another way of exporting
+// we can use it when we only want to export 1 thing
+
+// 1. Update the data
+// 2. Regenerate all the HTML = MVC (model-view-controller)
+
+// In MVC we split out code into 3 parts:
+// 1. Model - saves and manages the data {data folder }
+// 2. View - takes the data and displays it on the page { checkout.js }
+// 3. Controller - runs some code when we interact with the page {event listeners in checkout.js}
+
+// instead of updating data one-by-one we use MVC which can interact with each other and update the changes , or organise and design the code 
+
