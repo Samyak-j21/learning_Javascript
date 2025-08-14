@@ -308,6 +308,68 @@ cartModule.addToCart('id');
 // instead of doing all these we will use "DayJS" external library
 // usually all external libraries have documentations availabe which tells how to use that external library.
 
+/*
+================ Day.js Format Tokens Cheat Sheet ====================
+
+Year:
+YY      -> 2-digit year                 -> 21
+YYYY    -> 4-digit year                 -> 2025
+
+Month:
+M       -> Month number (1-12)          -> 8
+MM      -> Month number with leading 0  -> 08
+MMM     -> Abbreviated month name       -> Aug
+MMMM    -> Full month name              -> August
+
+Day of Month:
+D       -> Day of month (1-31)          -> 14
+DD      -> Day of month with leading 0  -> 14
+
+Day of Week:
+d       -> Day of week (0-6, Sun=0)     -> 4
+dd      -> Min day name                  -> Th
+ddd     -> Short day name                -> Thu
+dddd    -> Full day name                 -> Thursday
+
+Hour:
+H       -> Hour (0-23)                  -> 14
+HH      -> Hour with leading 0           -> 14
+h       -> Hour (1-12)                  -> 2
+hh      -> Hour with leading 0 (1-12)   -> 02
+
+Minute:
+m       -> Minute                        -> 5
+mm      -> Minute with leading 0         -> 05
+
+Second:
+s       -> Second                        -> 9
+ss      -> Second with leading 0         -> 09
+
+Millisecond:
+SSS     -> Millisecond (3 digits)       -> 123
+
+AM/PM:
+A       -> Uppercase AM/PM               -> PM
+a       -> Lowercase am/pm               -> pm
+
+Unix Timestamp:
+X       -> Unix timestamp (seconds)     -> 1628966400
+x       -> Unix timestamp (milliseconds)-> 1628966400000
+
+=====================================================================
+Example Usage:
+dayjs().format('YYYY-MM-DD HH:mm:ss A')  -> 2025-08-14 14:05:09 PM
+*/
+ 
+
+// using DayJs get the date 5 days after today and display it in format: <month> <day of month>
+
+/*
+import dayjs from "dayjs";
+const date = dayjs().add(5, "day").format("MMMM D");
+console.log(date);
+*/
+
 // ESM versions: a version that works with Javascript Modules
 // this will add export in front of libraries to be used by modules
 // import these by writing import {} from 'URL', Check checkout.html
