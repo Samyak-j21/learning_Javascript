@@ -388,3 +388,14 @@ console.log(date);
 
 // instead of updating data one-by-one we use MVC which can interact with each other and update the changes , or organise and design the code 
 
+// =========================== Testing ===============================
+
+// Manual testing: open website and test the code is running fine/not
+// disadvantages: hard to test every situation and hard to re-test
+
+// Automated testing: using code to test the code
+// we add test cases:
+// 1. basic test cases = test if code is working 
+// 2. edge case = test with values that are tricky
+
+// Test Suite: group of related tests
