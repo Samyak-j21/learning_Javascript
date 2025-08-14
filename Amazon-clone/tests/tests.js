@@ -21,7 +21,7 @@ else {
 }
 
 
-console.log('Round of case above 5:');
+console.log('Round of case equal to 5:');
 if (formatCurrency(2000.5) === '20.01') {
   console.log('passed');
 }

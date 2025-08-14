@@ -405,4 +405,19 @@ console.log(date);
 // Testing Framework: External library that help us write tests easier
 // ex- Jasmine,Jest(ReactJs),MochaJs
 
+// In Jasmine: specRunner = TestRunner
 
+// syntax to test in Jasmine:
+/* 
+      describe('Test Suite: formatCurrency', () => {
+        it('converts paise to ₹', () => {
+          expect(formatCurrency(2095)).toEqual('20.95');
+        });
+      });
+*/
+// where: (For more must read jasmine documentations)
+// 1. describe => gives a name
+// 2. it => tells what it do
+// 3. expect => checking test conditions
+
+// Note: we can use describe inside describe
