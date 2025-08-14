@@ -1,5 +1,5 @@
 // Named Exports
-import { cart, removeFromCart } from '../data/cart.js';
+import { cart, removeFromCart, updateDeliveryOption } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 import { deliveryOptions } from '../data/deliveryOptions.js';
@@ -11,26 +11,28 @@ const today = dayjs();
 const deliveryDate = today.add(7, 'days');
 deliveryDate.format('dddd, MMMM D');
 
-let cartSummaryHTML = '';
+function renderOrderSummary() {
 
-cart.forEach((cartItem) => {
-  const productId = cartItem.productId;
-  let matchingProduct = products.find(p => p.id === productId);
+  let cartSummaryHTML = '';
 
-  const deliveryOptionsId = cartItem.deliveryOptionsId;
+  cart.forEach((cartItem) => {
+    const productId = cartItem.productId;
+    let matchingProduct = products.find(p => p.id === productId);
 
-  let deliveryOption;
-  deliveryOptions.forEach((option) => {
-    if (option.id === deliveryOptionsId) {
-      deliveryOption = option;
-    }
-  });
+    const deliveryOptionsId = cartItem.deliveryOptionsId;
 
-  const today = dayjs();
-  const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-  const dateString = deliveryDate.format('dddd, MMMM D');
+    let deliveryOption;
+    deliveryOptions.forEach((option) => {
+      if (option.id === deliveryOptionsId) {
+        deliveryOption = option;
+      }
+    });
 
-  cartSummaryHTML += `
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+    const dateString = deliveryDate.format('dddd, MMMM D');
+
+    cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
         Delivery date: ${dateString}
@@ -68,24 +70,26 @@ cart.forEach((cartItem) => {
       </div>
     </div>
   `;
-});
+  });
 
-function deliveryOptionsHTML(matchingProduct, cartItem) {
-  let html = '';
+  function deliveryOptionsHTML(matchingProduct, cartItem) {
+    let html = '';
 
-  deliveryOptions.forEach((deliveryOptions) => {
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOptions.deliveryDays, 'days');
-    const dateString = deliveryDate.format('dddd, MMMM D');
+    deliveryOptions.forEach((deliveryOptions) => {
+      const today = dayjs();
+      const deliveryDate = today.add(deliveryOptions.deliveryDays, 'days');
+      const dateString = deliveryDate.format('dddd, MMMM D');
 
-    const priceString = deliveryOptions.priceRupees === 0
-      ? 'FREE'
-      : `₹${formatCurrency(deliveryOptions.priceRupees)} -`;
+      const priceString = deliveryOptions.priceRupees === 0
+        ? 'FREE'
+        : `₹${formatCurrency(deliveryOptions.priceRupees)} -`;
 
-    const isChecked = deliveryOptions.id === cartItem.deliveryOptionsId;
+      const isChecked = deliveryOptions.id === cartItem.deliveryOptionsId;
 
-    html += `
-      <div class="delivery-option">
+      html += `
+      <div class="delivery-option js-delivery-option" 
+      data-product-id="${matchingProduct.id}"
+      data-delivery-option-id="${deliveryOptions.id}">
         <input 
           type="radio"
           ${isChecked ? 'checked' : ''}
@@ -99,62 +103,74 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
         </div>
       </div>
     `;
-  });
+    });
 
-  return html;
-}
-
-document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
-
-// Delete functionality
-document.querySelectorAll('.js-delete-link').forEach((link) => {
-  link.addEventListener('click', () => {
-    const productId = link.dataset.productId;
-    removeFromCart(productId);
-    document.querySelector(`.js-cart-item-container-${productId}`).remove();
-    calculateOrderSummary();
-  });
-});
-
-// Calculate totals
-function calculateOrderSummary() {
-  let itemsTotal = 0;
-  let totalQty = 0;
-
-  cart.forEach((cartItem) => {
-    const product = products.find(p => p.id === cartItem.productId);
-    if (product) {
-      itemsTotal += product.priceRupees * cartItem.quantity;
-      totalQty += cartItem.quantity;
-    }
-  });
-
-  let shipping = 0;
-  let tax = 0;
-  const taxRate = 0.10;
-
-  if (cart.length > 0) {
-    const beforeTax = itemsTotal + shipping;
-    tax = beforeTax * taxRate;
-    const orderTotal = beforeTax + tax;
-
-    document.querySelector('.js-checkout-element').textContent = `${totalQty} items`;
-    document.querySelector('.js-checkout-qty').textContent = totalQty;
-    document.querySelector('.js-items-total').textContent = ` ₹${formatCurrency(itemsTotal)}`;
-    document.querySelector('.js-shipping').textContent = ` ₹${formatCurrency(shipping)}`;
-    document.querySelector('.js-before-tax').textContent = ` ₹${formatCurrency(beforeTax)}`;
-    document.querySelector('.js-tax').textContent = ` ₹${formatCurrency(tax)}`;
-    document.querySelector('.js-order-total').textContent = ` ₹${formatCurrency(orderTotal)}`;
-  } else {
-    document.querySelector('.js-checkout-element').textContent = `0 items`;
-    document.querySelector('.js-checkout-qty').textContent = `0`;
-    document.querySelector('.js-items-total').textContent = ` ₹0.00`;
-    document.querySelector('.js-shipping').textContent = ` ₹0.00`;
-    document.querySelector('.js-before-tax').textContent = ` ₹0.00`;
-    document.querySelector('.js-tax').textContent = ` ₹0.00`;
-    document.querySelector('.js-order-total').textContent = ` ₹0.00`;
+    return html;
   }
+
+  document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+
+  // Delete functionality
+  document.querySelectorAll('.js-delete-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      const productId = link.dataset.productId;
+      removeFromCart(productId);
+      document.querySelector(`.js-cart-item-container-${productId}`).remove();
+      calculateOrderSummary();
+    });
+  });
+
+  document.querySelectorAll('.js-delivery-option').forEach((element) => {
+    element.addEventListener('click', () => {
+      const { productId, deliveryOptionId } = element.dataset;
+      updateDeliveryOption(productId, deliveryOptionId);
+      calculateOrderSummary();
+      renderOrderSummary();
+
+    });
+  });
+
+  // Calculate totals
+  function calculateOrderSummary() {
+    let itemsTotal = 0;
+    let totalQty = 0;
+
+    cart.forEach((cartItem) => {
+      const product = products.find(p => p.id === cartItem.productId);
+      if (product) {
+        itemsTotal += product.priceRupees * cartItem.quantity;
+        totalQty += cartItem.quantity;
+      }
+    });
+
+    let shipping = 0;
+    let tax = 0;
+    const taxRate = 0.10;
+
+    if (cart.length > 0) {
+      const beforeTax = itemsTotal + shipping;
+      tax = beforeTax * taxRate;
+      const orderTotal = beforeTax + tax;
+
+      document.querySelector('.js-checkout-element').textContent = `${totalQty} items`;
+      document.querySelector('.js-checkout-qty').textContent = totalQty;
+      document.querySelector('.js-items-total').textContent = ` ₹${formatCurrency(itemsTotal)}`;
+      document.querySelector('.js-shipping').textContent = ` ₹${formatCurrency(shipping)}`;
+      document.querySelector('.js-before-tax').textContent = ` ₹${formatCurrency(beforeTax)}`;
+      document.querySelector('.js-tax').textContent = ` ₹${formatCurrency(tax)}`;
+      document.querySelector('.js-order-total').textContent = ` ₹${formatCurrency(orderTotal)}`;
+    } else {
+      document.querySelector('.js-checkout-element').textContent = `0 items`;
+      document.querySelector('.js-checkout-qty').textContent = `0`;
+      document.querySelector('.js-items-total').textContent = ` ₹0.00`;
+      document.querySelector('.js-shipping').textContent = ` ₹0.00`;
+      document.querySelector('.js-before-tax').textContent = ` ₹0.00`;
+      document.querySelector('.js-tax').textContent = ` ₹0.00`;
+      document.querySelector('.js-order-total').textContent = ` ₹0.00`;
+    }
+  }
+
+  calculateOrderSummary();
 }
 
-// Run once on page load
-calculateOrderSummary();
+renderOrderSummary();
