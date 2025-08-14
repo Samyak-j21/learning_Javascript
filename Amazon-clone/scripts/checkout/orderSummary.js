@@ -8,9 +8,6 @@ import { renderPaymentSummary } from './paymentSummary.js';
 // Default Exports
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
-const today = dayjs();
-const deliveryDate = today.add(7, 'days');
-deliveryDate.format('dddd, MMMM D');
 
 export function renderOrderSummary() {
 
@@ -112,7 +109,13 @@ export function renderOrderSummary() {
     link.addEventListener('click', () => {
       const productId = link.dataset.productId;
       removeFromCart(productId);
-      document.querySelector(`.js-cart-item-container-${productId}`).remove();
+
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
+
+      container.remove();
+
+      renderPaymentSummary();
+
     });
   });
 
