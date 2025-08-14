@@ -1,6 +1,11 @@
+// Named Exports
 import { cart, removeFromCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
+import { deliveryOptions } from '../data/deliveryOptions.js';
+
+// Default Exports
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
 const today = dayjs();
 const deliveryDate = today.add(7, 'days');
@@ -12,10 +17,23 @@ cart.forEach((cartItem) => {
   const productId = cartItem.productId;
   let matchingProduct = products.find(p => p.id === productId);
 
-  cartSummaryHTML += ` 
+  const deliveryOptionsId = cartItem.deliveryOptionsId;
+
+  let deliveryOption;
+  deliveryOptions.forEach((option) => {
+    if (option.id === deliveryOptionsId) {
+      deliveryOption = option;
+    }
+  });
+
+  const today = dayjs();
+  const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+  const dateString = deliveryDate.format('dddd, MMMM D');
+
+  cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
-        Delivery date: Tuesday, June 21
+        Delivery date: ${dateString}
       </div>
 
       <div class="cart-item-details-grid">
@@ -32,10 +50,9 @@ cart.forEach((cartItem) => {
             <span>
               Quantity: <span class="quantity-label">${cartItem.quantity}</span>
             </span>
-            <span class="update-quantity-link link-primary">
-              Update
-            </span>
-            <span class="delete-quantity-link link-primary js-delete-link"
+            <span class="update-quantity-link link-primary">Update</span>
+            <span 
+              class="delete-quantity-link link-primary js-delete-link"
               data-product-id="${matchingProduct.id}">
               Delete
             </span>
@@ -46,57 +63,58 @@ cart.forEach((cartItem) => {
           <div class="delivery-options-title">
             Choose a delivery option:
           </div>
-          <div class="delivery-option">
-            <input type="radio" checked class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Tuesday, June 21
-              </div>
-              <div class="delivery-option-price">
-                FREE Shipping
-              </div>
-            </div>
-          </div>
-          <div class="delivery-option">
-            <input type="radio" class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Wednesday, June 15
-              </div>
-              <div class="delivery-option-price">
-                $4.99 - Shipping
-              </div>
-            </div>
-          </div>
-          <div class="delivery-option">
-            <input type="radio" class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
-            <div>
-              <div class="delivery-option-date">
-                Monday, June 13
-              </div>
-              <div class="delivery-option-price">
-                $9.99 - Shipping
-              </div>
-            </div>
+          ${deliveryOptionsHTML(matchingProduct, cartItem)}
+        </div>
+      </div>
+    </div>
+  `;
+});
+
+function deliveryOptionsHTML(matchingProduct, cartItem) {
+  let html = '';
+
+  deliveryOptions.forEach((deliveryOptions) => {
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOptions.deliveryDays, 'days');
+    const dateString = deliveryDate.format('dddd, MMMM D');
+
+    const priceString = deliveryOptions.priceRupees === 0
+      ? 'FREE'
+      : `₹${formatCurrency(deliveryOptions.priceRupees)} -`;
+
+    const isChecked = deliveryOptions.id === cartItem.deliveryOptionsId;
+
+    html += `
+      <div class="delivery-option">
+        <input 
+          type="radio"
+          ${isChecked ? 'checked' : ''}
+          class="delivery-option-input" 
+          name="delivery-option-${matchingProduct.id}">
+        <div>
+          <div class="delivery-option-date">${dateString}</div>
+          <div class="delivery-option-price">
+            ${priceString} - Shipping
           </div>
         </div>
       </div>
-    </div> 
-  `;
-});
+    `;
+  });
+
+  return html;
+}
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
 // Delete functionality
-document.querySelectorAll('.js-delete-link')
-  .forEach((link) => {
-    link.addEventListener('click', () => {
-      const productId = link.dataset.productId;
-      removeFromCart(productId);
-      document.querySelector(`.js-cart-item-container-${productId}`).remove();
-      calculateOrderSummary(); // update totals after deleting
-    });
+document.querySelectorAll('.js-delete-link').forEach((link) => {
+  link.addEventListener('click', () => {
+    const productId = link.dataset.productId;
+    removeFromCart(productId);
+    document.querySelector(`.js-cart-item-container-${productId}`).remove();
+    calculateOrderSummary();
   });
+});
 
 // Calculate totals
 function calculateOrderSummary() {
@@ -116,12 +134,10 @@ function calculateOrderSummary() {
   const taxRate = 0.10;
 
   if (cart.length > 0) {
-    // Calculate totals
     const beforeTax = itemsTotal + shipping;
     tax = beforeTax * taxRate;
     const orderTotal = beforeTax + tax;
 
-    // Update DOM
     document.querySelector('.js-checkout-element').textContent = `${totalQty} items`;
     document.querySelector('.js-checkout-qty').textContent = totalQty;
     document.querySelector('.js-items-total').textContent = ` ₹${formatCurrency(itemsTotal)}`;
@@ -130,7 +146,6 @@ function calculateOrderSummary() {
     document.querySelector('.js-tax').textContent = ` ₹${formatCurrency(tax)}`;
     document.querySelector('.js-order-total').textContent = ` ₹${formatCurrency(orderTotal)}`;
   } else {
-    // Cart is empty, clear fields
     document.querySelector('.js-checkout-element').textContent = `0 items`;
     document.querySelector('.js-checkout-qty').textContent = `0`;
     document.querySelector('.js-items-total').textContent = ` ₹0.00`;

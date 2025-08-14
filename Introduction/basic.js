@@ -308,3 +308,10 @@ cartModule.addToCart('id');
 // instead of doing all these we will use "DayJS" external library
 // usually all external libraries have documentations availabe which tells how to use that external library.
 
+// ESM versions: a version that works with Javascript Modules
+// this will add export in front of libraries to be used by modules
+// import these by writing import {} from 'URL', Check checkout.html 
+
+ // Default Export:
+ // another way of exporting
+ // we can use it when we only want to export 1 thing
