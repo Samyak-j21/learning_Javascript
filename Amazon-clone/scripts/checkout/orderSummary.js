@@ -1,8 +1,9 @@
 // Named Exports
 import { cart, removeFromCart, updateDeliveryOption } from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { products, getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import { deliveryOptions } from '../../data/deliveryOptions.js';
+import { deliveryOptions, getDeliveryOptions } from '../../data/deliveryOptions.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 // Default Exports
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
@@ -17,16 +18,12 @@ export function renderOrderSummary() {
 
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
-    let matchingProduct = products.find(p => p.id === productId);
+
+    const matchingProduct = getProduct(productId);
 
     const deliveryOptionsId = cartItem.deliveryOptionsId;
 
-    let deliveryOption;
-    deliveryOptions.forEach((option) => {
-      if (option.id === deliveryOptionsId) {
-        deliveryOption = option;
-      }
-    });
+    let deliveryOption = getDeliveryOptions(deliveryOptionsId);
 
     const today = dayjs();
     const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
@@ -46,7 +43,7 @@ export function renderOrderSummary() {
             ${matchingProduct.name}
           </div>
           <div class="product-price">
-            $${formatCurrency(matchingProduct.priceRupees)}
+            ₹${formatCurrency(matchingProduct.priceRupees)}
           </div>
           <div class="product-quantity">
             <span>
@@ -116,7 +113,6 @@ export function renderOrderSummary() {
       const productId = link.dataset.productId;
       removeFromCart(productId);
       document.querySelector(`.js-cart-item-container-${productId}`).remove();
-      calculateOrderSummary();
     });
   });
 
@@ -124,52 +120,10 @@ export function renderOrderSummary() {
     element.addEventListener('click', () => {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
-      calculateOrderSummary();
       renderOrderSummary();
-
+      renderPaymentSummary();
     });
   });
 
-  // Calculate totals
-  function calculateOrderSummary() {
-    let itemsTotal = 0;
-    let totalQty = 0;
-
-    cart.forEach((cartItem) => {
-      const product = products.find(p => p.id === cartItem.productId);
-      if (product) {
-        itemsTotal += product.priceRupees * cartItem.quantity;
-        totalQty += cartItem.quantity;
-      }
-    });
-
-    let shipping = 0;
-    let tax = 0;
-    const taxRate = 0.10;
-
-    if (cart.length > 0) {
-      const beforeTax = itemsTotal + shipping;
-      tax = beforeTax * taxRate;
-      const orderTotal = beforeTax + tax;
-
-      document.querySelector('.js-checkout-element').textContent = `${totalQty} items`;
-      document.querySelector('.js-checkout-qty').textContent = totalQty;
-      document.querySelector('.js-items-total').textContent = ` ₹${formatCurrency(itemsTotal)}`;
-      document.querySelector('.js-shipping').textContent = ` ₹${formatCurrency(shipping)}`;
-      document.querySelector('.js-before-tax').textContent = ` ₹${formatCurrency(beforeTax)}`;
-      document.querySelector('.js-tax').textContent = ` ₹${formatCurrency(tax)}`;
-      document.querySelector('.js-order-total').textContent = ` ₹${formatCurrency(orderTotal)}`;
-    } else {
-      document.querySelector('.js-checkout-element').textContent = `0 items`;
-      document.querySelector('.js-checkout-qty').textContent = `0`;
-      document.querySelector('.js-items-total').textContent = ` ₹0.00`;
-      document.querySelector('.js-shipping').textContent = ` ₹0.00`;
-      document.querySelector('.js-before-tax').textContent = ` ₹0.00`;
-      document.querySelector('.js-tax').textContent = ` ₹0.00`;
-      document.querySelector('.js-order-total').textContent = ` ₹0.00`;
-    }
-  }
-
-  calculateOrderSummary();
 }
 

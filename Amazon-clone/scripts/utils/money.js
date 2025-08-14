@@ -1,3 +1,3 @@
 export function formatCurrency(priceRupees) {
-  return (priceRupees / 100).toFixed(2);
+  return (Math.round(priceRupees / 100)).toFixed(2);
 }
