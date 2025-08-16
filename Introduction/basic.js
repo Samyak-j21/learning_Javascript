@@ -592,10 +592,14 @@ console.log(this);
 */
 
 /* syntax:
-new Promise((resolve, reject) => {})
+new Promise((resolve, reject) => {
+  reject('error');
+  resolve();    
+  })
 */
 
 // resolve- similar to done() function, lets us control when to go to the next step
+// reject- lets us help create error in future
 
 // Since Multiple CallBacks cause a lots of nesting, hence we use 'Promises' to work
 // promises lets us flatten out code.
@@ -626,3 +630,20 @@ loadProductsFetch();
 // it let us write asynchronous code like normal code.
 
 // NOTE: we can only use 'await' when we're inside 'async' function.
+
+// ================================ Error Handling =====================================
+
+// When we're sending HTTP request, we could get unexpected errors.
+// set up a seperate callbacks just for errors.
+
+// To handle error in promises: promises give us 2 methods: .then() and .catch()
+
+// To handle errors in Async Await: we use try/catch blocks
+
+// Try/catch: we can use this with any code: {synchronous/Asynchronous}
+,
+// when we get an error it stops the rest execution and goes directly to catch block
+
+// try/catch is meant to handle "unexpected errors" {code is correct,but something outside our control}
+
+// we can manually create error: after try just write -> throw 'error1';
