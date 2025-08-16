@@ -525,7 +525,7 @@ console.log(this);
 */
 // prefer Procedural programming in JS but when working with team try to use OOP.
 
-/* we learnt: 
+/* we learnt:
 1. Object Oriented Programming
 2. Use a function to generate Objects
 3. Classes
@@ -534,3 +534,37 @@ console.log(this);
 6. Method overriding and Polymorphism
 7. details about "this"
 */
+
+
+
+// ================================== Backend ==========================================
+
+// It is another computer that manages backend of the data
+
+// HTTP: Hyper Text Transfer Protocol, use to communicate with another system
+
+// XMLHttpRequest - this is a built-in Class provided by JS to send HTTP message, it creates a new HTTP message to send to backend.
+
+// .open() -> it takes 2 parameters:
+// 1. what message to sent :
+// ex- 'GET', where GET means get some info from backend ,{more are: POST,PUT,DELETE}.
+// 2. where to send this HTTP message
+// ex- URL=uniform resource locator, like an address but for computer
+// https://amazon.com {https means secure version, amazon.com is domain}
+
+// xhr.send(); , send request to backend.
+
+// xhr.addEventListener('load', () => {
+//   console.log(xhr.response);
+// });                                      waiting for message to get respond
+
+/* Status code: tells us message succeeded or failed
+1. Starts with 4 or 5 (400,500,404) = failed , 4 means our fault , 5 means backend fault
+2. starts with 2 (200,201,204) = succeeded
+*/
+
+// API = Application Programming Interface
+// Note: The backend can respond with different types of data
+
+// we can use browser to make a GET request
+
