@@ -503,7 +503,7 @@ output: Sat Aug 16 2025 15:39:23 GMT+0530 (India Standard Time)
 
 
 /* ============ Summary of "this" ==========
-1. inside a method, it points to the outer object: ex- 
+1. inside a method, it points to the outer object: ex-
 const object2 = {
   method() {
     console.log(this);
@@ -516,11 +516,21 @@ function logThis() {
 }
 logThis.call('hello');
 
-3. Arrow functions, do not change the value of this: ex- 
+3. Arrow functions, do not change the value of this: ex-
 console.log(this);
 [1, 2, 3].forEach(() => {
   console.log(this);
 });
 
 */
+// prefer Procedural programming in JS but when working with team try to use OOP.
 
+/* we learnt: 
+1. Object Oriented Programming
+2. Use a function to generate Objects
+3. Classes
+4. Private properties and methods
+5. Inheritance
+6. Method overriding and Polymorphism
+7. details about "this"
+*/
