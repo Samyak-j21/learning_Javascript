@@ -656,3 +656,5 @@ loadProductsFetch();
 // we can manually create error: after try just write -> throw 'error1';
 
 // window.location.href = 'file_path';  ===> it will refer to page when clicking used in paymentsummary.js go and check how when u open checkout.js click "place your order".
+
+// URL- parameters: also known as search parameters saving data in url and further use them using Javascript.
