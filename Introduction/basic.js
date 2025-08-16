@@ -569,3 +569,16 @@ console.log(this);
 // we can use browser to make a GET request
 
 // callback- a function to run in the future
+
+// Testing Backend using Jasmine-:
+// To wait for async code: it will give a function called- done()
+
+// done() -> lets us control when to go to the next step
+
+/* Use done() like this -> 
+ beforeAll((done) => {
+    loadProducts(() => {
+      done();
+    });
+  });
+*/
