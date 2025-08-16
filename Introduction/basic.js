@@ -575,10 +575,32 @@ console.log(this);
 
 // done() -> lets us control when to go to the next step
 
-/* Use done() like this -> 
+/* Use done() like this ->
  beforeAll((done) => {
     loadProducts(() => {
       done();
     });
   });
 */
+
+// ================================= Promises ==========================================
+
+/* what are Promises: 
+1. better way to handle asynchronous code
+2. similar to done() function of Jasmine.
+3. let us wait for some code to finish, before going to the next step
+*/
+
+/* syntax:
+new Promise((resolve, reject) => {}) 
+*/
+
+// resolve- similar to done() function, lets us control when to go to the next step
+
+// Since Multiple CallBacks cause a lots of nesting, hence we use 'Promises' to work
+// promises lets us flatten out code.
+
+// Hence it is recommended to use Promise instead of callbacks. hence promises keep our codes flatten.
+
+// we can run multiple promises at same time:
+// Promise.all() -> lets us run multiple promises at same time and wait for all to finish.
