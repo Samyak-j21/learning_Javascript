@@ -472,3 +472,8 @@ iv.   learning different Hooks
 // Has to be named "constructor"
 // should not return anything
 
+// Private: only be accessed inside the class (put a '#' in front)
+// Public: can be accessed outside also (all are public without '#')
+// to access private property just put # in front
+
+// In JS we can also have private methods
