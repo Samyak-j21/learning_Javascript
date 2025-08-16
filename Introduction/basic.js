@@ -658,3 +658,19 @@ loadProductsFetch();
 // window.location.href = 'file_path';  ===> it will refer to page when clicking used in paymentsummary.js go and check how when u open checkout.js click "place your order".
 
 // URL- parameters: also known as search parameters saving data in url and further use them using Javascript.
+
+/* In this lesson we learnt about:
+1. Backend and HTTP
+2. XMLHttpRequest and fetch()
+3. Asynchronous code
+4. callbacks, promises, async await
+5. How to test asynchronous code
+6. Error handling
+7. use backend in our project
+*/
+
+
+
+// Note: Learn how to create out own backend:
+// 1. command Line
+// 2. Node.js = create our own backend
