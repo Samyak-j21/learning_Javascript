@@ -465,10 +465,10 @@ iv.   learning different Hooks
 
 // we use OOP because it tries to represent the real world. digitally
 
-// class: object generator (helps us generate objects).
+// Class: object generator (helps us generate objects).
 
 // Features of classes:
-// constructor : lets us run setup code 
+// constructor : lets us run setup code
 // Has to be named "constructor"
 // should not return anything
 
@@ -477,3 +477,12 @@ iv.   learning different Hooks
 // to access private property just put # in front
 
 // In JS we can also have private methods
+
+// Inheritance: lets us reuse code between classes
+
+// syntax: class Clothing extends Product {},  that means Clothing inherit all properties of Product.
+
+// super() -> calls constructor of parent class {we can access parent class using this}
+
+// Polymorphism: use a method withoud knowing the class or we can say that same function or method name can be used for diffrent types of objects, and each objects provide its own implementation.
+
