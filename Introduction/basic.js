@@ -585,14 +585,14 @@ console.log(this);
 
 // ================================= Promises ==========================================
 
-/* what are Promises: 
+/* what are Promises:
 1. better way to handle asynchronous code
 2. similar to done() function of Jasmine.
 3. let us wait for some code to finish, before going to the next step
 */
 
 /* syntax:
-new Promise((resolve, reject) => {}) 
+new Promise((resolve, reject) => {})
 */
 
 // resolve- similar to done() function, lets us control when to go to the next step
@@ -604,3 +604,13 @@ new Promise((resolve, reject) => {})
 
 // we can run multiple promises at same time:
 // Promise.all() -> lets us run multiple promises at same time and wait for all to finish.
+
+// fetch() = better way to make HTTP request., fetch() uses a promise.
+/* Syntax :- 
+function loadProductsFetch() {
+  fetch('https://supersimplebackend.dev/products').then((response) => {
+    console.log(response);
+  })
+}
+loadProductsFetch();
+*/
