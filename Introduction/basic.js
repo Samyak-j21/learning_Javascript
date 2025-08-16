@@ -552,7 +552,7 @@ console.log(this);
 // ex- URL=uniform resource locator, like an address but for computer
 // https://amazon.com {https means secure version, amazon.com is domain}
 
-// xhr.send(); , send request to backend.
+// xhr.send(); , send request to backend. but it is asynchronous{doesnt wait for response to come back}
 
 // xhr.addEventListener('load', () => {
 //   console.log(xhr.response);
@@ -568,3 +568,4 @@ console.log(this);
 
 // we can use browser to make a GET request
 
+// callback- a function to run in the future

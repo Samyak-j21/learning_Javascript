@@ -1,11 +1,17 @@
 import { cart, addToCart } from '../data/cart.js';
-import { products } from '../data/products.js';
+import { products, loadProducts } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
-let productsHTML = "";
 
-products.forEach((product) => {
-  productsHTML += `
+loadProducts(renderProductsGrid);
+
+
+function renderProductsGrid() {
+
+  let productsHTML = "";
+
+  products.forEach((product) => {
+    productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image" src="${product.image}">
@@ -60,36 +66,37 @@ products.forEach((product) => {
       </button>
     </div>
   `;
-});
-
-// console.log(productsHTML);
-
-document.querySelector(".js-products-grid").innerHTML = productsHTML;
-
-updateCartQuantity();
-
-function updateCartQuantity() {
-  let cartQuantity = 0;
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
   });
 
-  const cartQuantityElement =
-    document.querySelector(".js-cart-quantity");
-  if (cartQuantityElement) {
-    cartQuantityElement.innerHTML = cartQuantity;
+  // console.log(productsHTML);
+
+  document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+  updateCartQuantity();
+
+  function updateCartQuantity() {
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+
+    const cartQuantityElement =
+      document.querySelector(".js-cart-quantity");
+    if (cartQuantityElement) {
+      cartQuantityElement.innerHTML = cartQuantity;
+    }
+
   }
+  document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = button.dataset.productId;
 
-}
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-  button.addEventListener("click", () => {
-    const productId = button.dataset.productId;
+      const selector = document.querySelector(`[data-quantity-selector="${productId}"]`);
+      const quantity = Number(selector.value);
 
-    const selector = document.querySelector(`[data-quantity-selector="${productId}"]`);
-    const quantity = Number(selector.value);
+      addToCart(productId, quantity);
+      updateCartQuantity();
 
-    addToCart(productId, quantity);
-    updateCartQuantity();
-
+    });
   });
-});
+}
