@@ -552,6 +552,13 @@ console.log(this);
 // ex- URL=uniform resource locator, like an address but for computer
 // https://amazon.com {https means secure version, amazon.com is domain}
 
+/* 4 types of request are:
+1. GET = get something from the backend
+2. POST = create something
+3. PUT = update something
+4. DELETE = delete something
+*/
+
 // xhr.send(); , send request to backend. but it is asynchronous{doesnt wait for response to come back}
 
 // xhr.addEventListener('load', () => {
@@ -594,7 +601,7 @@ console.log(this);
 /* syntax:
 new Promise((resolve, reject) => {
   reject('error');
-  resolve();    
+  resolve();
   })
 */
 
@@ -610,7 +617,7 @@ new Promise((resolve, reject) => {
 // Promise.all() -> lets us run multiple promises at same time and wait for all to finish.
 
 // fetch() = better way to make HTTP request., fetch() uses a promise.
-/* Syntax :- 
+/* Syntax :-
 function loadProductsFetch() {
   fetch('https://supersimplebackend.dev/products').then((response) => {
     console.log(response);
@@ -641,9 +648,11 @@ loadProductsFetch();
 // To handle errors in Async Await: we use try/catch blocks
 
 // Try/catch: we can use this with any code: {synchronous/Asynchronous}
-,
+
 // when we get an error it stops the rest execution and goes directly to catch block
 
 // try/catch is meant to handle "unexpected errors" {code is correct,but something outside our control}
 
 // we can manually create error: after try just write -> throw 'error1';
+
+// window.location.href = 'file_path';  ===> it will refer to page when clicking used in paymentsummary.js go and check how when u open checkout.js click "place your order".
