@@ -614,3 +614,15 @@ function loadProductsFetch() {
 }
 loadProductsFetch();
 */
+
+
+// =================================== Async Await =====================================
+
+// even better way to handle asynchronous code, Async await is shortcut for promises
+// async= make a function return a promise.
+// we use 'async' because it lets us use 'await'
+
+// await= lets us wait for a promise to finish, before going to next line
+// it let us write asynchronous code like normal code.
+
+// NOTE: we can only use 'await' when we're inside 'async' function.
