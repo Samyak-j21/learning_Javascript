@@ -28,7 +28,7 @@ describe('Test Suite: renderOrderSummary', () => {
         quantity: 1,
         deliveryOptionsId: '2'
       }]);
-    });
+    }); 
     loadFromStorage();
 
     renderOrderSummary();
