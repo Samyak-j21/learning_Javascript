@@ -441,12 +441,27 @@ console.log(date);
 4. afterAll() - runs code after all test
 */
 
-/* In this lesson we learnt: 
+/* In this lesson we learnt:
 1. how to test code using Manual and automated tests
 2. how to organise codes using testcases and testsuites
 3. learnt using testing framework: Jasmine
 i.    help us write test easier
-ii.   mock and spyOn methods 
+ii.   mock and spyOn methods
 iii.  testing webpages using integration test
 iv.   learning different Hooks
 */
+
+// ================== Object Oriented Programming ====================
+
+// OOP: another style of programming (another way we write our code)
+
+// till now we have done procedural programming
+// in OOP: we organise out code into objects
+
+// shortHand Mehthod: loadFromStorage: function() {}
+// write: loadFromStorage() {}
+
+// this: gives us object that contains that function
+
+// we use OOP because it tries to represent the real world. digitally
+
