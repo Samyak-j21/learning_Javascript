@@ -408,7 +408,7 @@ console.log(date);
 // In Jasmine: specRunner = TestRunner
 
 // syntax to test in Jasmine:
-/* 
+/*
       describe('Test Suite: formatCurrency', () => {
         it('converts paise to ₹', () => {
           expect(formatCurrency(2095)).toEqual('20.95');
@@ -439,4 +439,14 @@ console.log(date);
 2. afterEach() - runs code after each test
 3. beforeAll() - runs code before all test
 4. afterAll() - runs code after all test
-*/ 
+*/
+
+/* In this lesson we learnt: 
+1. how to test code using Manual and automated tests
+2. how to organise codes using testcases and testsuites
+3. learnt using testing framework: Jasmine
+i.    help us write test easier
+ii.   mock and spyOn methods 
+iii.  testing webpages using integration test
+iv.   learning different Hooks
+*/
