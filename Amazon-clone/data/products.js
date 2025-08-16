@@ -40,6 +40,22 @@ class Product {
   }
 }
 
+class Appliances extends Product {
+  warrantyLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.warrantyLink = productDetails.warrantyLink;
+  }
+
+  extraInfoHTML() {
+    return `
+    <a href="${this.warrantyLink}" target="-blank">
+     Warranty Information</a>
+     `;
+  }
+}
+
 class Clothing extends Product {
   sizeChartLink;
 
@@ -122,7 +138,9 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliance",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -307,7 +325,9 @@ export const products = [
       "water boiler",
       "appliances",
       "kitchen"
-    ]
+    ],
+    type: "appliance",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
@@ -612,7 +632,9 @@ export const products = [
       "coffeemakers",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliance",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "02e3a47e-dd68-467e-9f71-8bf6f723fdae",
@@ -672,7 +694,9 @@ export const products = [
       "food blenders",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliance",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "36c64692-677f-4f58-b5ec-0dc2cf109e27",
@@ -724,6 +748,9 @@ export const products = [
 ].map((productDetails) => {
   if (productDetails.type === 'clothing') {
     return new Clothing(productDetails);
+  }
+  if (productDetails.type === 'appliance') {
+    return new Appliances(productDetails);
   }
   return new Product(productDetails);
 });
