@@ -55,9 +55,12 @@ class Clothing extends Product {
       Size chart</a> 
       `;
   }
-
 }
 
+const date = new Date()
+console.log(date);
+
+console.log(date.toLocaleDateString());
 
 export const products = [
   {

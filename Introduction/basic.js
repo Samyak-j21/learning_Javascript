@@ -486,3 +486,41 @@ iv.   learning different Hooks
 
 // Polymorphism: use a method withoud knowing the class or we can say that same function or method name can be used for diffrent types of objects, and each objects provide its own implementation.
 
+// Built-in-classes -> classes that are provided by language
+// ex: new Date() = generate an object that represent the current date.
+
+/*
+const date = new Date()
+console.log(date);
+---------------------------------------------------------------
+output: Sat Aug 16 2025 15:39:23 GMT+0530 (India Standard Time)
+*/
+
+// .toLocaleTimeString() = gives us the current time , it will give like: 16/04/25
+
+// .call() -> same as running the function with name
+
+
+
+/* ============ Summary of "this" ==========
+1. inside a method, it points to the outer object: ex- 
+const object2 = {
+  method() {
+    console.log(this);
+  }
+};
+
+2. inside a function, this = undefined , but we can change it later: ex-
+function logThis() {
+  console.log(this);
+}
+logThis.call('hello');
+
+3. Arrow functions, do not change the value of this: ex- 
+console.log(this);
+[1, 2, 3].forEach(() => {
+  console.log(this);
+});
+
+*/
+
