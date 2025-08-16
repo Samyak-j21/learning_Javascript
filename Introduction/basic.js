@@ -360,7 +360,7 @@ x       -> Unix timestamp (milliseconds)-> 1628966400000
 Example Usage:
 dayjs().format('YYYY-MM-DD HH:mm:ss A')  -> 2025-08-14 14:05:09 PM
 */
- 
+
 
 // using DayJs get the date 5 days after today and display it in format: <month> <day of month>
 
@@ -386,7 +386,7 @@ console.log(date);
 // 2. View - takes the data and displays it on the page { checkout.js }
 // 3. Controller - runs some code when we interact with the page {event listeners in checkout.js}
 
-// instead of updating data one-by-one we use MVC which can interact with each other and update the changes , or organise and design the code 
+// instead of updating data one-by-one we use MVC which can interact with each other and update the changes , or organise and design the code
 
 // =========================== Testing ===============================
 
@@ -397,7 +397,7 @@ console.log(date);
 // disadvantages: hard to write all code manually to test
 
 // we add test cases:
-// 1. basic test cases = test if code is working 
+// 1. basic test cases = test if code is working
 // 2. edge case = test with values that are tricky
 
 // Test Suite: group of related tests
@@ -428,3 +428,15 @@ console.log(date);
 // Flaky Test = test that sometimes passess and sometimes fails
 
 // To solve flaky test => we use Mocks in jasmine, mocks lets us replace a method with a fake version.
+
+// Unit tests: testing just a function or piece of code
+
+// Integration test: tests many units/piece of code working together.
+
+// Hooks(Jasmine) => lets us run some code for each test
+/* ex of Hooks provided by Jamine:->
+1. beforeEach() - runs code before each test
+2. afterEach() - runs code after each test
+3. beforeAll() - runs code before all test
+4. afterAll() - runs code after all test
+*/ 
