@@ -465,3 +465,10 @@ iv.   learning different Hooks
 
 // we use OOP because it tries to represent the real world. digitally
 
+// class: object generator (helps us generate objects).
+
+// Features of classes:
+// constructor : lets us run setup code 
+// Has to be named "constructor"
+// should not return anything
+
