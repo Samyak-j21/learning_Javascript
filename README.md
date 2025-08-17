@@ -1,10 +1,11 @@
-# 🟨 Learning JavaScript:
-This repository contains my journey of learning JavaScript along with a hands-on project: an *Amazon Clone* built using *HTML, CSS, and JavaScript*.  
+# 🟨 Learning JavaScript: 
+# This repository contains my journey of learning JavaScript along with a hands-on project: an *Amazon Clone* built using *HTML, CSS, and JavaScript*.  
+
 # 📂 Repository Structure:
-1. # Introduction: Contains my practice files, experiments, and notes from a JavaScript course.
+# 1.  Introduction: Contains my practice files, experiments, and notes from a JavaScript course.
 >  Check `basic.js` → This file contains my JavaScript notes and learnings that also helped in building the Amazon Clone.
 
-3. # amazon-clone: A simple frontend project where I tried to replicate the look and feel of Amazon’s website.
+# 2. amazon-clone: A simple frontend project where I tried to replicate the look and feel of Amazon’s website.
 >  🚀 How to Run the Amazon Clone:
 > 1. Navigate to the project folder: cd amazon-clone
 > 2. Locate the index.html file inside the folder.
